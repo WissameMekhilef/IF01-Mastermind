@@ -21,7 +21,6 @@ let rec construire_ListR taille listC=
 let rec compList list =
   match list with
   | []->true
-  |h::g::t->not(List.mem h (g::t)) && compList (g::t)
   |h::t-> not(List.mem h t) && compList t 
 
 (* Création de la liste sans redondance de couleur *)
