@@ -1,3 +1,6 @@
+open List;;
+open String;;
+
 (* Création d'un type couleur *)
 type couleur= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc;;
 
@@ -34,15 +37,10 @@ let rec  construire_ListSR list comp =
       aux t (h::res)
   in aux list [];;
 
-let listeComplete= construire_ListR 5 listeCouleur;;
-let listeSR= construire_ListSR listeComplete compList;;
-	    
-(* Supprime la premiere occurence de l'element e dans la liste l *)
-
 let suppression e l =
-  let rec aux l1 l2 = match l2 with
-      [] -> l1
-    | h::t -> if e = h then l1 @ t else aux (l1 @ [h]) t
+  let rec aux res l2 = match l2 with
+      [] -> res
+    | h::t -> if e = h then res @ t else aux (res @ [h]) t
   in aux [] l;;
 
 (* Compare deux combinaisons et retourne le nombre de pions communs *)
@@ -56,10 +54,10 @@ let pions_communs l1 l2 =
 (* Compare deux combinaisons et retourne le nombre de pions bien places *)
 
 let pions_bien_places l1 l2 =
-  let rec aux n l1 l2 = match l1 with
-      [] -> n
-    | h1::t1 -> match l2 with
-        h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2
+  let rec aux n l1 l2 = match l1,l2 with
+    | [],_ -> n
+    |_,[]->n
+    | h1::t1,h2::t2 -> if h1 = h2 then aux (n + 1) t1 t2 else aux n t1 t2
   in aux 0 l1 l2;;
 
 (* Compare deux combinaisons et retourne un couple d'entiers (bp, mp) *)
@@ -82,115 +80,86 @@ let elagage comb ind l =
         else aux l1 t
   in aux [] l;;
 
-(* Affiche une combinaison *)
+let listeComplete= construire_ListR 5 listeCouleur;;
+let listeSR= construire_ListSR listeComplete compList;;
 
 let rec print_list l =
   match l with
   | [] -> ()
   | h::t -> match h with
-    |Rouge-> print_string "Rouge";
-      print_string ", ";
+    |Rouge-> print_string "Rouge ";
       print_list t
-    |Bleu -> print_string "Bleu";
-      print_string ", ";
+    |Bleu -> print_string "Bleu ";
       print_list t
-    |Vert->  print_string "Vert";
-      print_string ", ";
+    |Vert->  print_string "Vert ";
       print_list t
-    |Noir->  print_string "Noir";
-      print_string ", ";
+    |Noir->  print_string "Noir ";
       print_list t
-    |Jaune->  print_string "Jaune";
-      print_string ", ";
+    |Jaune->  print_string "Jaune ";
       print_list t
-    |Orange->  print_string "Orange";
-      print_string ", ";
+    |Orange->  print_string "Orange ";
       print_list t
-    |Violet->  print_string "Violet";
-      print_string ", ";
+    |Violet->  print_string "Violet ";
       print_list t
-    |Blanc->  print_string "Blanc";
-      print_string ", ";
+    |Blanc->  print_string "Blanc ";
       print_list t;;
 
-(* sol est la solution *)
-(* max est le nombre d'essais maximum, ou 0 en cas d'absence de limite *)
-(* l est la liste des combinaisons connues par l'ordinateur *)
-(* Lance une partie de Mastermind *)
+exception Tricherie;;
 
-let mastermind sol max l =
+let jouer  nbcoup liste =
   let rec aux n l =
-    let prop = List.hd l in
-      if prop = sol then (
+    if l=[] then
+      raise Tricherie
+    else
+      let prop =hd l in
+      if List.length l=1 then (
         print_string "Essai ";
         print_int n;
         print_string " : ";
         print_list prop;
         print_string "gagne !";
         print_newline())
-      else if n = max then (
-        let ind = indications prop sol in
-          match ind with
-              bp, mp -> (
-                print_string "Essai ";
-                print_int n;
-                print_string " : ";
-                print_list prop;
-                print_int bp;
-                print_string " pion(s) bien place(s), ";
-                print_int mp;
-                print_string " pion(s) mal place(s), perdu...";
-                print_newline()))
+      else if n = nbcoup then (
+        print_string "  perdu...";
+        print_newline())
       else (
-        let ind = indications prop sol in
-          match ind with
-              bp, mp -> (
-                print_string "Essai ";
-                print_int n;
-                print_string " : ";
-                print_list prop;
-                print_int bp;
-                print_string " pion(s) bien place(s), ";
-                print_int mp;
-                print_string " pion(s) mal place(s).";
-                print_newline();
-                aux (n + 1) (elagage prop ind l))
-      )
-  in aux 1 l;;
-
-(* Retourne l'entier correspondant a la couleur donnee sous forme de string *)
-
-let couleur s =
-  match s with
-  |"Rouge" -> Rouge 
-  |"Bleu" -> Bleu 
-  |"Vert" -> Vert 
-  |"Noir" -> Noir 
-  |"Jaune" -> Jaune 
-  |"Orange" -> Orange 
-  |"Violet" -> Violet 
-  |"Blanc" -> Blanc;;
-
-(* Lance une partie de Mastermind en ligne de commande *)
-
-let main =
-  print_string "MASTERMIND";
-  print_newline();
-  print_string "Entrez votre combinaison :";
-  print_newline();
-  let c1 = couleur (read_line()) in
-  let c2 = couleur (read_line()) in
-  let c3 = couleur (read_line()) in
-  let c4 = couleur (read_line()) in
-  let c5 = couleur (read_line()) in
-  let sol = [c1; c2; c3; c4; c5] in
-    print_string "Entrez la difficulte de la partie (1, 2 ou 3) :";
-    print_newline();
-    let diff = read_int() in
-      if diff = 1 then mastermind sol 0 listeSR
-      else if diff = 2 then mastermind sol 0 listeComplete
-      else (
-        print_string "Entrez le nombre d'essais maximum :";
+        print_string "Essai ";
+        print_int n;
+        print_string " : ";
+        print_list prop;
+	print_string "\n";
+	print_string "Nombre de pion(s) bien placé(s):\n";
+	let bp=read_int() in
+	print_string "Nombre de pions(s) mal placé(s):\n";
+	let mp=read_int() in
         print_newline();
-        let n = read_int() in mastermind sol n listeComplete);
-      print_string "Au revoir.";;
+        aux (n + 1) (elagage prop (bp,mp) l))
+  in aux 1 liste;;
+
+let menu listC listSR=
+  print_newline();
+  print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité)\n";
+  let mode=read_int() in
+  match  mode with
+  |1->begin try 
+	  jouer 0 listSR;
+	  print_string "Au revoir! \n";
+    with
+      Tricherie-> print_string "Tricherie! \n"; end 
+   |2->begin  try 
+	  jouer 0 listC;
+	    print_string "Au revoir! \n";
+      with Tricherie->print_string "Tricherie! \n"; end
+  |3->begin print_string "Souhaitez vous un nombre de coups maximum? (0 pour aucun)\n";
+   let nbcoup=read_int() in 
+	try 
+	  jouer nbcoup listC;
+	  print_string "Au revoir! \n";
+	with Tricherie->print_string "Tricherie!"; end
+  |_-> print_string "Erreur de choix";;
+ 
+let main() =
+  print_string "MASTERMIND \n";
+  menu listeComplete listeSR;;
+
+main();;
