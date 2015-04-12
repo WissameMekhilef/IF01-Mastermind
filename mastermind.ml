@@ -80,9 +80,6 @@ let elagage comb ind l =
         else aux l1 t
   in aux [] l;;
 
-let listeComplete= construire_ListR 5 listeCouleur;;
-let listeSR= construire_ListSR listeComplete compList;;
-
 let rec print_list l =
   match l with
   | [] -> ()
@@ -113,14 +110,11 @@ let jouer  nbcoup liste =
     else
       let prop =hd l in
       if List.length l=1 then (
-        print_string "Essai ";
-        print_int n;
-        print_string " : ";
         print_list prop;
-        print_string "gagne !";
+        print_string "est la bonne combinaison !\n";
         print_newline())
       else if n = nbcoup then (
-        print_string "  perdu...";
+        print_string "Plus d'essai: PERDU!\n";
         print_newline())
       else (
         print_string "Essai ";
@@ -136,30 +130,36 @@ let jouer  nbcoup liste =
         aux (n + 1) (elagage prop (bp,mp) l))
   in aux 1 liste;;
 
-let menu listC listSR=
+let rec menu listC listSR=
   print_newline();
-  print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité)\n";
+  print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité, 0: quitter)\n";
   let mode=read_int() in
   match  mode with
   |1->begin try 
 	  jouer 0 listSR;
-	  print_string "Au revoir! \n";
+	  menu listC listSR
     with
       Tricherie-> print_string "Tricherie! \n"; end 
    |2->begin  try 
 	  jouer 0 listC;
-	    print_string "Au revoir! \n";
+	  menu listC listSR
       with Tricherie->print_string "Tricherie! \n"; end
   |3->begin print_string "Souhaitez vous un nombre de coups maximum? (0 pour aucun)\n";
    let nbcoup=read_int() in 
 	try 
 	  jouer nbcoup listC;
-	  print_string "Au revoir! \n";
+	  menu listC listSR
 	with Tricherie->print_string "Tricherie!"; end
-  |_-> print_string "Erreur de choix";;
+  |0->print_string "Merci d'avoir joué!\n"
+  |_-> print_string "Erreur de choix\n";
+    menu listC listSR;;
+
+let listeComplete= construire_ListR 5 listeCouleur;;
+let listeSR= construire_ListSR listeComplete compList;;
  
 let main() =
   print_string "MASTERMIND \n";
-  menu listeComplete listeSR;;
+  menu listeComplete listeSR;
+  print_string "Au revoir! \n";;
 
 main();;
