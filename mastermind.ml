@@ -1,5 +1,4 @@
 open List;;
-open String;;
 
 (* Création d'un type couleur *)
 type couleur= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc;;
@@ -24,7 +23,7 @@ let rec construire_ListR taille listC=
 let rec compList list =
   match list with
   | []->true
-  |h::t-> not(List.mem h t) && compList t 
+  |h::t-> not(mem h t) && compList t 
 
 (* Création de la liste sans redondance de couleur *)
 let rec  construire_ListSR list comp =
@@ -36,6 +35,8 @@ let rec  construire_ListSR list comp =
     else
       aux t (h::res)
   in aux list [];;
+
+(* Supprime la 1ere occurence de e dans l *)
 
 let suppression e l =
   let rec aux res l2 = match l2 with
@@ -49,7 +50,7 @@ let pions_communs l1 l2 =
   let rec aux l1 l2 = match l1 with
       [] -> l2
     | h::t -> aux t (suppression h l2)
-  in List.length l2 - List.length (aux l1 l2);;
+  in length l2 - length (aux l1 l2);;
 
 (* Compare deux combinaisons et retourne le nombre de pions bien places *)
 
@@ -80,6 +81,8 @@ let elagage comb ind l =
         else aux l1 t
   in aux [] l;;
 
+(* Affichage des couleurs  *)
+
 let rec print_list l =
   match l with
   | [] -> ()
@@ -103,13 +106,17 @@ let rec print_list l =
 
 exception Tricherie;;
 
+(* fonction de jeu: affichage de la propostion *)
+(* elagage de la liste en fonction de bp et mp *)
+(* test de Tricherie et combinaison caché *)
+
 let jouer  nbcoup liste =
   let rec aux n l =
     if l=[] then
       raise Tricherie
     else
       let prop =hd l in
-      if List.length l=1 then (
+      if length l=1 then (
         print_list prop;
         print_string "est la bonne combinaison !\n";
         print_newline())
@@ -130,29 +137,38 @@ let jouer  nbcoup liste =
         aux (n + 1) (elagage prop (bp,mp) l))
   in aux 1 liste;;
 
+(* Menu récursif pour rejouer *)
+(* gestion de la Tricherie *)
+(* choix du mode de jeu *)
+
 let rec menu listC listSR=
   print_newline();
   print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité, 0: quitter)\n";
   let mode=read_int() in
   match  mode with
-  |1->begin try 
-	  jouer 0 listSR;
-	  menu listC listSR
+  |1->begin try
+	      jouer 0 listSR;
+	      menu listC listSR
     with
-      Tricherie-> print_string "Tricherie! \n"; end 
+      Tricherie-> print_string "Tricherie! \n";
+	menu listC listSR end
    |2->begin  try 
 	  jouer 0 listC;
 	  menu listC listSR
-      with Tricherie->print_string "Tricherie! \n"; end
+      with Tricherie->print_string "Tricherie! \n";
+	menu listC listSR end 
   |3->begin print_string "Souhaitez vous un nombre de coups maximum? (0 pour aucun)\n";
    let nbcoup=read_int() in 
 	try 
 	  jouer nbcoup listC;
 	  menu listC listSR
-	with Tricherie->print_string "Tricherie!"; end
+	with Tricherie->print_string "Tricherie!";
+	  menu listC listSR end
   |0->print_string "Merci d'avoir joué!\n"
   |_-> print_string "Erreur de choix\n";
     menu listC listSR;;
+
+(* Construction des listes de combinaison*)
 
 let listeComplete= construire_ListR 5 listeCouleur;;
 let listeSR= construire_ListSR listeComplete compList;;
