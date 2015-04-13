@@ -1,5 +1,6 @@
 open List;;
 
+(* Création d'un module avec création type couleur et les fonctions associées *)
 module ListCouleur=struct
 (* Création d'un type couleur *)
 type couleur= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
