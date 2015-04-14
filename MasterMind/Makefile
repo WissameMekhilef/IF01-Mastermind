@@ -12,3 +12,7 @@ run : mastermind
 	./mastermind
 pdf : rapport.tex
 	pdflatex rapport.tex
+	rm rapport.lof
+	rm rapport.aux
+	rm rapport.log
+	rm rapport.toc
