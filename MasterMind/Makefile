@@ -4,3 +4,5 @@ compile : mastermind.ml listCouleur.ml
 	ocamlc -o mastermind listCouleur.cmo mastermind.cmo
 run : mastermind
 	./mastermind
+pdf : rapport.tex
+	pdflatex rapport.tex

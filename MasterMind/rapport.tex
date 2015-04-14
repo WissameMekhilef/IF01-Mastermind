@@ -1,0 +1,143 @@
+\documentclass[a4paper,twoside,12pt]{report}
+% \usepackage[utf8x]{inputenc}
+\usepackage{color}
+\usepackage{fancyvrb} % pour mettre les verbatim dans des boites
+%\usepackage[dvipdf]{graphics}
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{listingsutf8}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{textcomp}
+\usepackage[toc,page]{appendix} 
+%\usepackage{hyperref}
+% Quelques réglages particuliers
+\oddsidemargin=-0.1in %xx
+\evensidemargin=-0.1in
+\textwidth=6.1in
+\topmargin=-0.5in
+\textheight=8.7in
+\parskip 0.25in
+\lstset{
+language=Java,
+basicstyle=\normalsize,
+upquote=true,
+aboveskip={1.5\baselineskip},
+columns=fullflexible,
+showstringspaces=false,
+extendedchars=true,
+breaklines=true,
+showtabs=false,
+showspaces=false,
+showstringspaces=false,
+identifierstyle=\ttfamily,
+keywordstyle=\color[rgb]{1,0,1},
+commentstyle=\color[rgb]{0.133,0.545,0.133},
+stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+\fancyhead[RO,RE]{\includegraphics[width=0.5in]{Logo-univ-orleans.png}}
+\fancyhead[CO,CE]{Rapport de projet}
+\fancyhead[LO,LE]{Jeu de Taquin}
+\fancyfoot[C]{2014}
+\fancyfoot[RO, LE] {\thepage}
+%\fancyfoot[LO, RE] { ARNOULT S., MEKHILEF W., OUSSAD J., RETY M.}
+%
+%Quelques macros
+\newcommand{\moncode}[1]{\begin{center}
+                        \lstinputlisting[inputencoding=utf8/latin1]{#1}
+                        \end{center}}
+
+\newcommand{\monimage}[4]{
+\par\noindent
+\begin{figure}[H] %on ouvre l'environnement figure
+\begin{center}
+\includegraphics[width=0.9\textwidth]{#1} %ou image.png, .jpeg etc.
+\caption{#2} %la légende
+\label{#3} %l'étiquette pour faire référence à cette image
+\end{center}
+\end{figure} %on ferme l'environnement figure
+}
+
+\newcommand{\ml}[0]{\par\noindent}
+
+%\hyphenation{supplémentaires}{sup-pl\'e-men-tai-res}
+%opening
+\title{\textcolor{blue}{\Large Rapport du projet IF06}\\\textcolor{blue}{\Large Jeu de Taquin}}
+\vskip 1cm
+\author{ARNOULT Simon, MEKHILEF Wissame, OUSSAD Jihad, RETY Martin \date{\today}}
+
+
+\begin{document}
+
+\thispagestyle{empty}
+%
+\begin{figure}[H]
+\includegraphics[width=0.2\linewidth]{Logo-univ-orleans.png}
+% \hfill
+
+\end{figure}
+\vspace{2cm}
+%
+\begin{center}
+{\Huge Licence 2 Informatique\\\ \\Rapport du projet IF04}
+\par\vspace{1.4cm}
+
+{\Huge\bf \textcolor{red}{\bf Jeu de Taquin}}
+\par\vspace{1.6cm}
+
+{\Large       Réalisé par:}
+\par\vspace{1.3cm}
+{\large\bf \textcolor{blue}{ARNOULT Simon, MEKHILEF Wissame, OUSSAD Jihad, RETY Martin}}
+\vfill
+\today
+\end{center}
+\newpage
+\pagestyle{fancy}
+
+\begin{abstract}
+%
+\end{abstract}
+ 
+\newpage
+\tableofcontents
+\listoffigures
+\newpage
+
+\chapter{Introduction}
+% 
+\section{Cahier des charges client}
+% 
+\section{Cahier des charges fonctionnel}
+% 
+\chapter{La gestion de projet}
+%
+\section{Le travail de groupe}
+%
+\section{Le diagramme de Gantt}
+%
+\section{Le diagramme PERT}
+%
+\section{Conception}
+%
+\section{Conception détaillée}
+%
+\chapter{Concepts et fonctions informatiques nécessaires}
+%
+\section{Les modules}
+%
+\chapter{Resources utilisées}
+\begin{itemize}
+ \item JUNIT
+ \item JAVA
+ \item Dia
+ \item Eclipse
+ \item Argouml
+ \item \LaTeX (sous kile)
+ \item Google Drive
+ \item Kate
+ \item Git, GitHub
+\end{itemize}
+
+\end{document}
