@@ -89,21 +89,21 @@ let rec print_list l =
   match l with
   | [] -> ()
   | h::t -> match h with
-    |Rouge-> print_string "\027[31m Rouge \027[30m";
+    |Rouge-> print_string "\027[31m Rouge \027[0m";
       print_list t
-    |Bleu -> print_string "\027[34m Bleu \027[30m";
+    |Bleu -> print_string "\027[34m Bleu \027[0m";
       print_list t
-    |Vert->  print_string "\027[32m Vert \027[30m";
+    |Vert->  print_string "\027[32m Vert \027[0m";
       print_list t
-    |Noir->  print_string "\027[30m Noir \027[30m";
+    |Noir->  print_string "\027[30m Noir \027[0m";
       print_list t
-    |Jaune->  print_string "\027[93m Jaune \027[30m";
+    |Jaune->  print_string "\027[93m Jaune \027[0m";
       print_list t
-    |Orange->  print_string "\027[33m Orange \027[30m";
+    |Orange->  print_string "\027[33m Orange \027[0m";
       print_list t
-    |Violet->  print_string "\027[35m Violet \027[30m";
+    |Violet->  print_string "\027[35m Violet \027[0m";
       print_list t
-    |Blanc->  print_string "\027[37m Blanc \027[30m";
+    |Blanc->  print_string "\027[37m Blanc \027[0m";
       print_list t
 
 end
