@@ -123,23 +123,24 @@ Pour faire ce projet nous avons utilisé:
 \moncode{construc.ml}
 \subsection{Création de la liste avec redondance}
 \par
-La fonction construction_ListR permet de construire la liste des combinaisons avec redondances, celle-ci possède 2 paramètres:
+La fonction construction\_ListR permet de construire la liste des combinaisons avec redondances, celle-ci possède 2 paramètres:
 \begin{itemize}
 \item taille, la taille des combinaisons
 \item listC, la liste des couleurs possibles
 \end{itemize}
 \par
-Elle possède une fonction auxiliaire construire_aux qui prend en paramètre une liste.
-La fonction principale et auxiliaire sont toutes deux récursives, la récursion de la fonction principale permet l'accumulation des appels de construire_aux en fonction de la taille (grâce à l'appel: construire_aux( construire_ListR (taille-1) listC) ). Quand à la fonction auxiliaire, celle-ci permet d'ajouter chacune des couleurs possibles sur tous les élements de la liste placée en paramètre ( (Rouge::h)::(Bleu::h) ...). Grâce à cette double récursion la création de la liste est très efficace malgré les 32768 cas à produire pour une combinaison de taille 5.
+Elle possède une fonction auxiliaire construire\_aux qui prend en paramètre une liste.
+La fonction principale et auxiliaire sont toutes deux récursives, la récursion de la fonction principale permet l'accumulation des appels de construire\_aux en fonction de la taille (grâce à l'appel: construire\_aux( construire\_ListR (taille-1) listC) ). Quand à la fonction auxiliaire, celle-ci permet d'ajouter chacune des couleurs possibles sur tous les élements de la liste placée en paramètre ( (Rouge::h)::(Bleu::h) ...). Grâce à cette double récursion la création de la liste est très efficace malgré les 32768 cas à produire pour une combinaison de taille 5.
 \subsection{Exemple:}
 %
-construire_ListR 1 listeCouleur;;
-renvoie la listC
-construire_ListR 2 listeCouleur;;
-renvoie [[Rouge;Rouge];[Bleu;Rouge];[Vert;Rouge];[Noir;Rouge];[Jaune;Rouge];[Orange;Rouge];[Violet;Rouge];[Blanc;Rouge];[Rouge;Bleu];[Bleu;Bleu];[Vert;Bleu]...
-construire_ListR 3 listeCouleur;;
-renvoie la liste construite par constuire_aux (construire_aux(construire_list 1 listeCouleur))
-\subsection[Création de la liste sans redondance}
+\par
+construire\_ListR 1 listeCouleur;;
+\par renvoie la listC
+\par construire\_ListR 2 listeCouleur;;
+\par renvoie [[Rouge;Rouge];[Bleu;Rouge];[Vert;Rouge];[Noir;Rouge];[Jaune;Rouge];[Orange;Rouge];[Violet;Rouge];[Blanc;Rouge];[Rouge;Bleu];[Bleu;Bleu];[Vert;Bleu]...
+\par construire\_ListR 3 listeCouleur;;
+\par renvoie la liste construite par constuire\_aux (construire\_aux(construire\_list 1 listeCouleur))
+\subsection{Création de la liste sans redondance}
 \par
 Pour créer cette liste nous avons besoin d'une fonction de comparaison compList prenant en paramètre une liste et qui renvoie un booléen:
 \begin{itemize}
@@ -147,20 +148,20 @@ Pour créer cette liste nous avons besoin d'une fonction de comparaison compList
 \item Faux, sinon
 \end{itemize}
 Ensuite pour la création de la liste, la fonction prend 2 paramètres:
+\begin{itemize}
 \item list, qui correspond à la liste copmlète des combinaisons possibles
 \item comp, le comparateur défini juste avant
 \end{itemize}
 \par
 Cette fonction utilise une fonction auxiliare aux prenant en paramètre une liste et le résultat des précédentes éxécutions. Elle consiste à tester chaque élément  de la liste avec le comparateur et ensuite les rajouter ou non dans la liste res.
 \section{Elagage}
-%
-\moncode{elag.ml}
+%\moncode{elag.ml} 
 \par
 Pour faire cette fonction d'élagage nous avons besoin de plusieurs fonctions:
 \begin{itemize}
 \item suppression, prenant en paramètre un élément e et une liste l. cette fonction permet de supprimer la 1ère occurence de l'élément e de la liste l
-\item pions_communs, prenant en paramètre 2 listes l1 et l2. Elle permet de renvoyer le nombre de pions communs entre ces 2 listes. Cette fonction utilise suppression pour surpprimer les élements de l1 appartenant aussi à l2, ensuite renvoie la longueur de la liste l2 moins la longueur de l2 avec application de la fonction auxiliaire
-\item pions_biens_places, prenant 2 listes l1 et l2 en paramètre. Elle compare les élements de même ordre dans les 2 listes et renvoie le nombre des éléments identiques de ces 2 listes.
+\item pions\_communs, prenant en paramètre 2 listes l1 et l2. Elle permet de renvoyer le nombre de pions communs entre ces 2 listes. Cette fonction utilise suppression pour surpprimer les élements de l1 appartenant aussi à l2, ensuite renvoie la longueur de la liste l2 moins la longueur de l2 avec application de la fonction auxiliaire
+\item pions\_biens\_places, prenant 2 listes l1 et l2 en paramètre. Elle compare les élements de même ordre dans les 2 listes et renvoie le nombre des éléments identiques de ces 2 listes.
 \item indications, prenant 2 listes l1 et l2, celle-ci appelle les 2 fonctions précédentes et renvoie le couple (bp,mp) (sachant qu'il faut réduire mp avec bp)
 \end{itemize}
 \par
@@ -176,18 +177,19 @@ Avec toutes ces fonctions, il suffit de faire la fonction elagage, prenant en pa
 \par
 La fonction jouer est seulement l'application de diverse fonction, exception ou d'affichage en fonction des paramètre quelle possède, ceux-ci sont  le nombre de coup disponible et la liste sur laquelle on travaille. Cette fonction utilise une autre fonction auxiliare permettant simplement l'ajout du nombre coup n éxéctuer pour le moment. Les différents cas de la fonction jouer sont :
 \begin{itemize}
-\item _,[]-> ce cas correspond à une tricherie car la liste n'est vide seulement dans le cas ou l'utlisateur rentre de mauvaise indication, l'ordinateur supprime alors tous les cas existants
+\item \_,[]-> ce cas correspond à une tricherie car la liste n'est vide seulement dans le cas ou l'utlisateur rentre de mauvaise indication, l'ordinateur supprime alors tous les cas existants
 \item x,[h] -> affiche la bonne combinaison car il ne reste plus qu'un seul élément dans la liste
-\item x,_ quand x est supérieur à nbcoup et différent de 0 -> celle-ci indique que l'ordinateur à perdu car il n'a plus de coup disponible
-\item x,_ -> le dernier cas qui permet l'affichage de la proposition de l'ordinateur, l'entrée des informations de l'utilisateur (tout en ayant une gestion d'erreur de saisie) et l'application de l'élagage sur la liste avec les indications de l'utilisateur et la dernière proposition de l'ordinateur ( aux (x+1) (ListCouleur.elagage prop (bm,mp) l))
-
+\item x,\_ quand x est supérieur à nbcoup et différent de 0 -> celle-ci indique que l'ordinateur à perdu car il n'a plus de coup disponible
+\item x,\_ -> le dernier cas qui permet l'affichage de la proposition de l'ordinateur, l'entrée des informations de l'utilisateur (tout en ayant une gestion d'erreur de saisie) et l'application de l'élagage sur la liste avec les indications de l'utilisateur et la dernière proposition de l'ordinateur ( aux (x+1) (ListCouleur.elagage prop (bm,mp) l))
+\end{itemize}
 \subsection{Fonction restante}
 \par
 Il reste quelque fonction à définir:
 \begin{itemize}	
-\item print_list, celle-ci permet simplement l'affichage sur terminal d'une liste de couleur
+\item print\_list, celle-ci permet simplement l'affichage sur terminal d'une liste de couleur
 \item menu, prenant en paramètre les 2 types de liste de combinaison (avec/sans redondance). Celle-ci permet le choix du mode (matching), la gestion des exceptions d'erreur de saisie et de tricherie (try/with) et une récursion permettant la rejouabilité du programme
 \item main(), faisant juste l'appel du menu ave c les 2 types de liste 
+\end{itemize}
 \chapter{Exemples et Conclusion}
 %
 \section{Quelques exemples}
