@@ -11,13 +11,13 @@ let jouer  nbcoup liste =
   let rec aux n l =
     match (n,l) with
     |_,[]-> raise Tricherie
-    |x,_ when x>nbcoup && nbcoup<>0->
-      print_string "Plus d'essai: PERDU!\n";
-      print_newline();
     |x,[h]->
       let prop =hd l in
       ListCouleur.print_list prop;
       print_string "est la bonne combinaison !\n";
+      print_newline();
+    |x,_ when x>nbcoup && nbcoup<>0->
+      print_string "Plus d'essai: PERDU!\n";
       print_newline();
     |x,_->
       let prop=hd l in
