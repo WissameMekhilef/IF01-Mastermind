@@ -7,7 +7,7 @@ exception Tricherie;;
 (* elagage de la liste en fonction de bp et mp *)
 (* test de Tricherie et combinaison caché *)
 
-let jouer  nbcoup liste =
+let jouer  nbcoup liste  =
   let rec aux n l =
     match (n,l) with
     |_,[]-> raise Tricherie
@@ -43,17 +43,18 @@ let jouer  nbcoup liste =
 
 let rec menu listC listSR=
   print_newline();
+   print_string "Choisissez votre combinaison de 5 couleurs parmis les couleurs suivantes:\n \027[31m Rouge \027[0m \027[34m Bleu \027[0m \027[32m Vert \027[0m \027[30m Noir \027[0m \027[93m Jaune \027[0m \027[33m Orange \027[0m\027[35m Violet \027[0m \027[37m Blanc \027[0m \n";
+   try
   print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité, 0: quitter)\n";
-  try
     let mode=read_int() in
     match  mode with
-    |1->jouer 0 listSR;
+    |1->jouer 0 listSR ;
 	menu listC listSR    
-    |2->jouer 0 listC;
+    |2->jouer 0 listC ;
 	menu listC listSR   
     |3->print_string "Combien de coups maximum souhaitez vous?\n";
       let nbcoup=read_int() in        
-	jouer nbcoup listC;
+	jouer nbcoup listC ;
 	menu listC listSR      
     |0->print_string "Merci d'avoir joué!\n"
     |_-> print_string "Erreur de choix\n";

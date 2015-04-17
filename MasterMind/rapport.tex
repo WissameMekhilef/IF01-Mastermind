@@ -130,7 +130,13 @@ La fonction construction\_ListR permet de construire la liste des combinaisons a
 \end{itemize}
 \par
 Elle possède une fonction auxiliaire construire\_aux qui prend en paramètre une liste.
-La fonction principale et auxiliaire sont toutes deux récursives, la récursion de la fonction principale permet l'accumulation des appels de construire\_aux en fonction de la taille (grâce à l'appel: construire\_aux( construire\_ListR (taille-1) listC) ). Quand à la fonction auxiliaire, celle-ci permet d'ajouter chacune des couleurs possibles sur tous les élements de la liste placée en paramètre ( (Rouge::h)::(Bleu::h) ...). Grâce à cette double récursion la création de la liste est très efficace malgré les 32768 cas à produire pour une combinaison de taille 5.
+La fonction principale et auxiliaire sont toutes deux récursives, la récursion et le matching de la fonction principale permet:
+\begin{itemize}
+\item Pour le cas de la liste de taille 1 : l'appel à listC qui permet d'initialiser la liste.
+\item Pour le reste des cas: l'accumulation des appels de construire\_aux en fonction de la taille (grâce à l'appel: construire\_aux( construire\_ListR (taille-1) listC))
+\end{itemize}
+\par Quant à la fonction auxiliaire, celle-ci permet d'ajouter chacune des couleurs possibles sur tous les élements de la liste placée en paramètre ( (Rouge::h)::(Bleu::h) ...). 
+\par Grâce à cette double récursion la création de la liste est très efficace malgré les 32768 cas à produire pour une combinaison de taille 5.
 \subsection{Exemple:}
 %
 \par
@@ -149,11 +155,11 @@ Pour créer cette liste nous avons besoin d'une fonction de comparaison compList
 \end{itemize}
 Ensuite pour la création de la liste, la fonction prend 2 paramètres:
 \begin{itemize}
-\item list, qui correspond à la liste copmlète des combinaisons possibles
+\item list, qui correspond à la liste complète des combinaisons possibles
 \item comp, le comparateur défini juste avant
 \end{itemize}
 \par
-Cette fonction utilise une fonction auxiliare aux prenant en paramètre une liste et le résultat des précédentes éxécutions. Elle consiste à tester chaque élément  de la liste avec le comparateur et ensuite les rajouter ou non dans la liste res.
+Cette fonction utilise une fonction auxiliare aux prenant en paramètre une liste et le résultat des précédentes éxécutions. Elle consiste à tester chaque élément  de la liste avec le comparateur, suivant le prédicat not (comp h),  et ensuite les rajouter ou non dans la liste res.
 \section{Elagage}
 %\moncode{elag.ml} 
 \par
@@ -192,6 +198,10 @@ Il reste quelque fonction à définir:
 \end{itemize}
 \chapter{Exemples et Conclusion}
 %
+\section{Conclusion et réponse à la question subsidiaire}
+\par Nous avons essayé d'appliquer toutes les notions vues en cours, c'est-à-dire favoriser les matching, utiliser un module et essayer de faire des fonctions récursive terminales.
+\par Pour répondre à la question subsidaire, qui était de pouvoir répérer si l'utilisateur triche, celle-ci est gérée dans la fonction jouer qui est compatible avec toutes les versions. Pour se faire il suffit de tester si la liste des possibilités est vide après élagage, si oui alors l'utilisateur à donner des indications erronées sinon la jeu peut continuer. Il existe un autre cas qui consiste à tester si la solution de l'ordinateur et si la combinaison cachée de l'utilisateur sont les même, mais cela implique que l'ordinateur connaisse la bonne réponse et de rentrer la combinaison caché avant de jouer. Pour pouvoir faire cela il suffit juste rajouter des entrées our construire la solution et ensuite tester lorsque qu'il n'y a plus qu'un élément dans la liste si celui-ci correspond à cette solution. Toutefois nous n'avons pas implémenter cette option car nous ne savions pas si celui-ci concordait avec le sujet et car normalement seul l'utilisateur connait la solution.
+
 \section{Quelques exemples}
 
 \end{document}

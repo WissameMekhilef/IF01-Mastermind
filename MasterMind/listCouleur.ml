@@ -2,6 +2,7 @@ open List;;
 
 (* Création d'un module avec création type couleur et les fonctions associées *)
 module ListCouleur=struct
+
 (* Création d'un type couleur *)
 type couleur= Rouge | Bleu | Vert | Noir | Jaune | Orange | Violet | Blanc
 
@@ -10,16 +11,15 @@ let listeCouleur= [[Rouge];[Bleu];[Vert];[Noir];[Jaune];[Orange];[Violet];[Blanc
 (* Création de la liste de coup possible avec redondance *)
 let rec construire_ListR taille listC=
   let rec construire_aux list= 
-    match list with (* permet de créer les différents pattern / ajout récursif à la liste de possibilité *)
+    match list with
     |[]->[]
     |h::t->(Rouge::h)::(Bleu::h)::(Vert::h)::(Noir::h)::(Jaune::h)::(Orange::h)::(Violet::h)::(Blanc::h)::(construire_aux t)
-  in match taille with (* permet de répéter/accumuler récursivement la fonction pour obtenir la bonne taille de possibilité  *)
+  in match taille with 
   |1 -> listC
   |_-> if taille>=1 then
       construire_aux (construire_ListR (taille-1) listC)
     else 
       failwith "Erreur taille trop petite"
-
 
 (* Création dela fonction de comparaison *)
 let rec compList list =
@@ -47,7 +47,6 @@ let suppression e l =
   in aux [] l
 
 (* Compare deux combinaisons et retourne le nombre de pions communs *)
-
 let pions_communs l1 l2 =
   let rec aux l1 l2 = match l1 with
       [] -> l2
@@ -55,7 +54,6 @@ let pions_communs l1 l2 =
   in length l2 - length (aux l1 l2);;
 
 (* Compare deux combinaisons et retourne le nombre de pions bien places *)
-
 let pions_bien_places l1 l2 =
   let rec aux n l1 l2 = match l1,l2 with
     | [],_ -> n
@@ -65,7 +63,6 @@ let pions_bien_places l1 l2 =
 
 (* Compare deux combinaisons et retourne un couple d'entiers (bp, mp) *)
 (* bp est le nombre de pions bien places et mp le nombre de pions mal places *)
-
 let indications l1 l2 =
   let bp = pions_bien_places l1 l2 in
   let mp = (pions_communs l1 l2) - bp in (bp, mp)
@@ -74,7 +71,6 @@ let indications l1 l2 =
 (* ind est le couple d'indications donnee par l'utilisateur *)
 (* l est la liste des solutions potentielles selon l'ordinateur *)
 (* Supprime de l toutes les combinaisons qui ne peuvent etre la solution *)
-
 let elagage comb ind l =
   let rec aux l1 l2 = match l2 with
       [] -> l1
@@ -84,7 +80,6 @@ let elagage comb ind l =
   in aux [] l
 
 (* Affichage des couleurs  *)
-
 let rec print_list l =
   match l with
   | [] -> ()

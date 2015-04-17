@@ -6,7 +6,6 @@ exception Tricherie;;
 (* fonction de jeu: affichage de la propostion *)
 (* elagage de la liste en fonction de bp et mp *)
 (* test de Tricherie et combinaison caché *)
-
 let jouer  nbcoup liste  =
   let rec aux n l =
     match (n,l) with
@@ -40,7 +39,6 @@ let jouer  nbcoup liste  =
 (* Menu récursif pour rejouer *)
 (* gestion de la Tricherie *)
 (* choix du mode de jeu *)
-
 let rec menu listC listSR=
   print_newline();
    print_string "Choisissez votre combinaison de 5 couleurs parmis les couleurs suivantes:\n \027[31m Rouge \027[0m \027[34m Bleu \027[0m \027[32m Vert \027[0m \027[30m Noir \027[0m \027[93m Jaune \027[0m \027[33m Orange \027[0m\027[35m Violet \027[0m \027[37m Blanc \027[0m \n";
@@ -64,7 +62,6 @@ let rec menu listC listSR=
   |Tricherie -> print_string "Tricherie!\n"; menu listC listSR;;
 
 (* Construction des listes de combinaison*)
-
 let listeComplete= ListCouleur.construire_ListR 5 ListCouleur.listeCouleur;;
 let listeSR= ListCouleur.construire_ListSR listeComplete ListCouleur.compList;;
  
