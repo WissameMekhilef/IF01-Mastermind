@@ -35,7 +35,7 @@ language=caml, frameround = fttt
                         \lstinputlisting[inputencoding=utf8/latin1]{#1}
                         \end{center}}
 
-\newcommand{\monimage}[4]{
+\newcommand{\monimage}[3]{
 \par\noindent
 \begin{figure}[H] %on ouvre l'environnement figure
 \begin{center}
@@ -132,8 +132,8 @@ La fonction construction\_ListR permet de construire la liste des combinaisons a
 Elle possède une fonction auxiliaire construire\_aux qui prend en paramètre une liste.
 La fonction principale et auxiliaire sont toutes deux récursives, la récursion et le matching de la fonction principale permet:
 \begin{itemize}
-\item Pour le cas de la liste de taille 1 : l'appel à listC qui permet d'initialiser la list.
-\item Pour le reste des cas: l'accumulation des appels de construire\_aux en fonction de la taille (grâce à l'appel: construire\_aux( construire\_ListR (taille-1) listC) )
+\item Pour le cas de la liste de taille 1 : l'appel à listC qui permet d'initialiser la liste.
+\item Pour le reste des cas: l'accumulation des appels de construire\_aux en fonction de la taille (grâce à l'appel: construire\_aux( construire\_ListR (taille-1) listC))
 \end{itemize}
 \par Quant à la fonction auxiliaire, celle-ci permet d'ajouter chacune des couleurs possibles sur tous les élements de la liste placée en paramètre ( (Rouge::h)::(Bleu::h) ...). 
 \par Grâce à cette double récursion la création de la liste est très efficace malgré les 32768 cas à produire pour une combinaison de taille 5.
@@ -203,5 +203,15 @@ Il reste quelque fonction à définir:
 \par Pour répondre à la question subsidaire, qui était de pouvoir répérer si l'utilisateur triche, celle-ci est gérée dans la fonction jouer qui est compatible avec toutes les versions. Pour se faire il suffit de tester si la liste des possibilités est vide après élagage, si oui alors l'utilisateur à donner des indications erronées sinon la jeu peut continuer. Il existe un autre cas qui consiste à tester si la solution de l'ordinateur et si la combinaison cachée de l'utilisateur sont les même, mais cela implique que l'ordinateur connaisse la bonne réponse et de rentrer la combinaison caché avant de jouer. Pour pouvoir faire cela il suffit juste rajouter des entrées our construire la solution et ensuite tester lorsque qu'il n'y a plus qu'un élément dans la liste si celui-ci correspond à cette solution. Toutefois nous n'avons pas implémenter cette option car nous ne savions pas si celui-ci concordait avec le sujet et car normalement seul l'utilisateur connait la solution.
 
 \section{Quelques exemples}
+Quelques exemples d'execution suivant les versions, l'implatation de la triche ne sera pas montré à chaque fois.
+
+\subsection{Version 1 : Sans redondance}
+Le code couleur choisi au début du jeu à été : Rouge, Vert, Blanc, Violet, Bleu.
+\monimage{mode1sanstriche.png}{Exemple pour le premier mode sans triche}{M1ST}
+
+\subsection{Version 2 : Avec redondance}
+
+Le code couleur choisi au début de cette partie à été : Violet, Violet, Blanc, Blanc, Blanc.
+\monimage{mode2sanstriche.png}{Exemple pour le deuxième mode sans triche}{M2ST}
 
 \end{document}

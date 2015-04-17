@@ -12,3 +12,9 @@ pdf : rapport.tex
 	rm rapport.aux
 	rm rapport.log
 	rm rapport.toc
+manuel : manuel.tex
+	pdflatex manuel.tex
+	rm manuel.tex
+	rm manuel.aux
+	rm manuel.log
+	rm mauel.toc
