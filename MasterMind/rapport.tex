@@ -100,7 +100,7 @@ language=caml, frameround = fttt, frame=single, showspaces=false, showstringspac
 \par
 Nous avons débuté ce projet en réfléchissant aux différentes manières d'aborder la création des combinaison des couleurs. Deux choix étaient possible, créer les combinaisons à partir de type string ou bien de créer nous même un type couleur. Nous avons alors opté pour créer un type somme couleur avec comme constructeur toutes les couleurs proposées dans le sujet. 
 \par
-Après avoir créé ce type couleur nous avons directement commencer à faire la fonction de construction de la liste de combinaison avec redondance, nous avions dans l'idée de créer la liste sans redondance avec cette liste et une fonction de comparaison. Nous avons alors commencé à programmer ces fonctions en binome. Martin s'est occupé de faire la fonction de création de la liste avec redondances et Wissame celle sans redondances, nous avons fait cela tout en gardant un oiel sur le travail de l'autre pour comprendre les fonctions et pouvoir les utiliser.
+Après avoir créé ce type couleur nous avons directement commencer à faire la fonction de construction de la liste de combinaison avec redondance, nous avions dans l'idée de créer la liste sans redondance avec cette liste et une fonction de comparaison. Nous avons alors commencé à programmer ces fonctions en binome. Martin s'est occupé de faire la fonction de création de la liste avec redondance et Wissame celle sans redondance, nous avons fait cela tout en gardant un oeil sur le travail de l'autre pour comprendre les fonctions et pouvoir les utiliser.
 \par 
 Ensuite nous nous sommes concerter sur la réalisation de la fonction d'élagage de la liste grâce aux indications. Nous avonc tester plusieurs façons de la réaliser mais la plupart ne permettaient pas la gestion de tous les cas, nous sommes donc partis sur une fonction d'élagage qui compare les indications de l'utilisateur et les indications de la combinaison à tester faite par d'autres fonctions. Pour faire ces fonctions nous avons travailler en binome.
 \par
@@ -126,7 +126,7 @@ Pourr introduire l'explication sur la contruction des listes voici-ci dessous le
 \moncode{construc.ml}
 \subsection{Création de la liste avec redondance}
 \par
-La fonction construction\_ListR permet de construire la liste des combinaisons avec redondances, celle-ci possède 2 paramètres:
+La fonction construction\_ListR permet de construire la liste des combinaisons avec redondance, celle-ci possède 2 paramètres:
 \begin{itemize}
 \item taille, la taille des combinaisons
 \item listC, la liste des couleurs possibles
@@ -200,8 +200,8 @@ Il reste quelque fonction à définir:
 \chapter{Exemples et Conclusion}
 %
 \section{Conclusion et réponse à la question subsidiaire}
-\par Nous avons essayé d'appliquer toutes les notions vues en cours, c'est-à-dire favoriser les matching, utiliser un module et essayer de faire des fonctions récursive terminales.
-\par Pour répondre à la question subsidaire, qui était de pouvoir répérer si l'utilisateur triche, celle-ci est gérée dans la fonction jouer qui est compatible avec toutes les versions. Pour se faire il suffit de tester si la liste des possibilités est vide après élagage, si oui alors l'utilisateur à donner des indications erronées sinon la jeu peut continuer. Il existe un autre cas qui consiste à tester si la solution de l'ordinateur et si la combinaison cachée de l'utilisateur sont les même, mais cela implique que l'ordinateur connaisse la bonne réponse et de rentrer la combinaison caché avant de jouer. Pour pouvoir faire cela il suffit juste rajouter des entrées our construire la solution et ensuite tester lorsque qu'il n'y a plus qu'un élément dans la liste si celui-ci correspond à cette solution. Toutefois nous n'avons pas implémenter cette option car nous ne savions pas si celui-ci concordait avec le sujet et car normalement seul l'utilisateur connait la solution.
+\par Nous avons essayé d'appliquer toutes les notions vues en cours, c'est-à-dire favoriser les matching, les exceptions, utiliser un module et essayer de faire des fonctions récursive terminales.
+\par Pour répondre à la question subsidaire, qui était de pouvoir répérer si l'utilisateur triche, celle-ci est gérée dans la fonction jouer qui est compatible avec toutes les versions. Pour se faire il suffit de tester si la liste des possibilités est vide après élagage, si oui alors l'utilisateur à donner des indications erronées sinon la jeu peut continuer. Il existe un autre cas qui consiste à tester si la solution de l'ordinateur et si la combinaison cachée de l'utilisateur sont les même, mais cela implique que l'ordinateur connaisse la bonne réponse et de rentrer la combinaison cachée avant de jouer. Pour pouvoir faire cela il suffit juste rajouter des entrées ou construire la solution et ensuite tester lorsque qu'il n'y a plus qu'un élément dans la liste si celui-ci correspond à cette solution. Toutefois nous n'avons pas implémenter cette option car nous ne savions pas si celui-ci concordait avec le sujet et car normalement seul l'utilisateur connait la solution.
 
 \chapter*{Quelques exemples}
 Quelques exemples d'éxécution suivant les versions, l'implantation de la triche ne sera pas montré à chaque fois.
