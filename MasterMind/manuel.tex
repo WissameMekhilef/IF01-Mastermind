@@ -2,7 +2,61 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{default}
+\usepackage[french]{babel}
+
+\usetheme{Warsaw}
+
+\title{Jeu de Mastermind}
+\subtitle{Manuel de l'utilisateur}
+\author{MEKHILEF Wissame \& RETY Martin}
+\institute{Université d'Orléans}
+\date{\today}
 
 \begin{document}
+
+  \begin{frame}
+   \titlepage
+  \end{frame}
+
+  \begin{frame}
+   \frametitle{Prérequis}
+   \begin{itemize}
+    \item L'utilitaire Make
+    \item Le package ocaml
+   \end{itemize}
+   \end{frame}
+   
+  \begin{frame}
+    \frametitle{Premiere fois}
+    \begin{itemize}
+     \item Se placer à la racine du dossier
+     \item Executer en ligne de commande  : make compile
+     \item Toujours en ligne de commande  : make run
+    \end{itemize}
+    Pour relancer une partie il suffit d'executer make run.
+  \end{frame}
+
+  \begin{frame}
+   \frametitle{Jouer à une partie}
+   Une fois le jeu lancer les différentes versions sont accessible par le biais d'un choix à faire au début de la partie:
+   \begin{itemize}
+    \item 1 : Partie répondant à la question 1, sans redondance de couleur.
+    \item 2 : Partie répondant à la question 2, avec une redondance dans les couleurs.
+    \item 3 : Partie répondant à la question 3, avec un nombre de coups limité.
+   \end{itemize}
+  \end{frame}
+  
+  \begin{frame}
+   \frametitle{Déroulement du jeu}
+   \begin{itemize}
+    \item Composez votre code de 5 couleurs
+    \item Renseignez la machine à chacun de ses essaies
+    \begin{itemize}
+     \item D'abord le nombre de couleurs bien placées
+     \item Puis le nombre de couleurs mal placées
+    \end{itemize}
+   \end{itemize}
+  \end{frame}
+
 
 \end{document}

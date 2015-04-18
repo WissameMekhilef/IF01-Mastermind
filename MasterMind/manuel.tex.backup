@@ -1,0 +1,22 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+\usepackage[french]{babel}
+
+\usetheme{Warsaw}
+
+\title{Jeu de Mastermind}
+\subtitle{Manuel de l'utilisateur}
+\author{MEKHILEF Wissame \& RETY Martin}
+\institute{Université d'Orléans}
+\date{\today}
+
+\begin{document}
+
+  \begin{frame}
+   \titlepage
+  \end{frame}
+
+
+\end{document}
