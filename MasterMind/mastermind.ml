@@ -41,7 +41,7 @@ let jouer  nbcoup liste  =
 (* choix du mode de jeu *)
 let rec menu listC listSR=
   print_newline();
-   print_string "Choisissez votre combinaison de 5 couleurs parmis les couleurs suivantes:\n \027[31m Rouge \027[0m \027[34m Bleu \027[0m \027[32m Vert \027[0m \027[30m Noir \027[0m \027[93m Jaune \027[0m \027[33m Orange \027[0m\027[35m Violet \027[0m \027[37m Blanc \027[0m \n";
+   print_string "Choisissez votre combinaison de 5 couleurs parmis les couleurs suivantes:\n Rouge Bleu Vert Noir Jaune Orange Violet Blanc\n";
    try
   print_string "Choisissez votre mode de jeu (1: Sans redondance, 2: Avec redondance, 3: avec nombre de coup limité, 0: quitter)\n";
     let mode=read_int() in
